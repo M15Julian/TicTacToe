@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="GameMode" SelectedIndex="0" Padding="5 3 0 0" Grid.Column="0" Background="LightGray">
+            <ComboBox x:Name="GameMode" SelectedIndex="0" Padding="5 3 0 3" Grid.Column="0" Background="LightGray" FontSize="15">
                 <ComboBoxItem>Player vs Player</ComboBoxItem>
                 <ComboBoxItem>Player vs Computer</ComboBoxItem>
             </ComboBox>
