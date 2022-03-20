@@ -4,7 +4,7 @@ This little project is my first project I made with C# WPF. It includes two game
 
 My code isn't clean as I'm still a beginner.
 
-## Introduction
+## Description
 
 If you change the game mode, it won't change until the next round.
 
