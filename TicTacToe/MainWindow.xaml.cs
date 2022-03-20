@@ -12,6 +12,7 @@ namespace TicTacToe_WPF
     public partial class MainWindow : Window
     {
         #region Variables
+
         private string[] Results;
         public static int[] startingpos = { 0, 3, 6, 0, 1, 2, 0, 2 };
         public static int[] directions = { 1, 1, 1, 3, 3, 3, 4, 2 };
@@ -19,6 +20,7 @@ namespace TicTacToe_WPF
         public int choice;
         public bool vsplayer;
         public bool PlayerTurn = true;
+
         #endregion
         #region Constructor
         public MainWindow()
@@ -26,14 +28,14 @@ namespace TicTacToe_WPF
             InitializeComponent();
             newGame();
         }
+
         #endregion
         #region BaseGame
+
         private void newGame()
         {
             if (GameMode.SelectedIndex == 0)
-            {
                 vsplayer = true;
-            }
             else vsplayer = false;
             PlayerTurn = true;
             Results = new string[9];
@@ -60,13 +62,13 @@ namespace TicTacToe_WPF
                 {
                     char lastCharacter = Button.Name[Button.Name.Length - 1];
                     Button.Content = "X";
-                    Results[Convert.ToInt32(lastCharacter) - 49] = "X";
+                    Results[Container.Children.Cast<Button>().ToList().IndexOf(Button)] = "X";
                 }
                 else
                 {
                     char lastCharacter = Button.Name[Button.Name.Length - 1];
                     Button.Content = "O";
-                    Results[Convert.ToInt32(lastCharacter) - 49] = "O";
+                    Results[Container.Children.Cast<Button>().ToList().IndexOf(Button)] = "O";
                 }
 
                 PlayerTurn = !PlayerTurn;
@@ -82,7 +84,7 @@ namespace TicTacToe_WPF
                 Button.IsEnabled = false;
                 if (determineWinner()) return;
                 //AI Move
-                miniMax(Results, true, 1);
+                MiniMax(Results, true, 1);
                 Container.Children.Cast<Button>().ToList().ElementAt(choice).Content = "O";
                 Container.Children.Cast<Button>().ToList().ElementAt(choice).IsEnabled = false;
                 Results[choice] = "O";
@@ -164,6 +166,7 @@ namespace TicTacToe_WPF
             }
             return emptySpaces;
         }
+
         #endregion
         #region Minimax
         private string[] DoMove(string[] board, int move, bool maximizingPlayer)
@@ -179,7 +182,7 @@ namespace TicTacToe_WPF
             }
             return copyposition;
         }
-        private int miniMax(string[] board, bool maximizingPlayer, int depth)
+        private int MiniMax(string[] board, bool maximizingPlayer, int depth)
         {
             depth += 1;
             string[] copyboard = copyGrid(board);
@@ -196,7 +199,7 @@ namespace TicTacToe_WPF
             {
                 if (board[i] != "X" && board[i] != "O")
                 {
-                    scores.Add(miniMax(DoMove(copyboard, i, maximizingPlayer), !maximizingPlayer, depth));
+                    scores.Add(MiniMax(DoMove(copyboard, i, maximizingPlayer), !maximizingPlayer, depth));
                     moves.Add(i);
                 }
             }
@@ -235,8 +238,8 @@ namespace TicTacToe_WPF
             }
             return clone;
         }
-        #endregion
 
+        #endregion
     }
 }
 
